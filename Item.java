@@ -1,5 +1,5 @@
 /**
- * Item class -  an item in an adventure game.
+ * Item class -  an item in an adventure game. For LAB 6
  * 
  * @author Scott Jennings
  * @version 2015.04.05

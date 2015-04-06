@@ -38,7 +38,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Room priorRoom = null;
+    private Room priorRoom = null;  // LAB 6
         
     /**
      * Create the game and initialise its internal map.
@@ -56,7 +56,7 @@ public class Game
     {
         Room rotunda, mammals, oceans, theatre, geology, astronomy, planetarium, mezzanine, galleries, mummies, gems, dinosaurs, research, auditorium, gifts, cafe;
       
-        // create the rooms
+        // create the rooms - LAB 6
         rotunda = new Room("inside the Smithsonian rotunda");
         mammals = new Room("in the mammals exhibit");
         oceans = new Room("in the oceans exhibit");
@@ -126,7 +126,7 @@ public class Game
         cafe.setExit("east", gifts);
         
         
-        //create items
+        //create items  - LAB 6
         Item datingTool = new Item("equipment to date artifacts",2);
         Item dino = new Item("dinosaur skeleton",5000);
         Item mammoth = new Item("woolly mammoth",2600);
@@ -137,7 +137,7 @@ public class Game
         Item mummyCase = new Item("mummy case", 45);
         Item infoDesk = new Item("information desk", 200);
         
-        //place items in rooms
+        //place items in rooms - LAB 6
         research.placeItem(datingTool);
         dinosaurs.placeItem(dino);
         rotunda.placeItem(mammoth);

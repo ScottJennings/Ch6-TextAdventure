@@ -2,13 +2,18 @@
  * Representations for all the valid command words for the game
  * along with a string in a particular language.
  * 
+ * @author Scott Jennings
+ * @version 2015.04.05
+ * 
+ * Added PHOTO, LOOK and BACK for LAB 6.
+ * 
  * @author  Michael Kölling and David J. Barnes
  * @version 2011.08.10
  */
 public enum CommandWord
 {
     // A value for each command word along with its
-    // corresponding user interface string.
+    // corresponding user interface string.  - LAB 6
     GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), LOOK("look"), PHOTO("photo"), BACK("back");
     
     // The command string.
