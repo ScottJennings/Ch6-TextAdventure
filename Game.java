@@ -71,7 +71,7 @@ public class Game
         dinosaurs = new Room("in the dinosaurs room");
         research = new Room("in the research room");
         auditorium = new Room("in the auditorium");
-        gifts = new Room("in the giftship");
+        gifts = new Room("in the giftshop");
         cafe = new Room("in the cafe");
         
         // initialise room exits on first floor
@@ -121,9 +121,10 @@ public class Game
         auditorium.setExit("up", rotunda);
         
         gifts.setExit("west", cafe);
+        gifts.setExit("south", auditorium);
         
         cafe.setExit("east", gifts);
-        cafe.setExit("south", auditorium);
+        
         
         //create items
         Item datingTool = new Item("equipment to date artifacts",2);
