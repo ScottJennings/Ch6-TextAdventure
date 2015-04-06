@@ -14,7 +14,21 @@
  * @author Scott Jennings
  * @version 2015.04.05
  * 
- * Scott Jennings has implemented:  16 rooms, two axis of movement, 
+ * This version has 16 rooms and 6 new features
+ * The new features are:
+ * 1. up/down direction
+ * 2. look command
+ * 3. photo command (text confirmation)
+ * 4. back command
+ * 5. general item support (item object and printing in room description)
+ * 6. support for multiple items in a room
+ * 
+ * Summary:
+ * The world explored in this adventure is a natural science museum based on the D.C. Smithsonian.
+ * It has 16 rooms on 3 floors and allows up/down movement between floors.  In addition to compass
+ * direction moves, it supports a back move, a look command (replay room description), and a photo
+ * command to take a photo of the room.  The rooms can contain contain zero or more items.  Making
+ * the item an independent object will allow future versions to have a player carry items between rooms.
  * 
  * @author  Michael Kölling and David J. Barnes
  * @version 2011.08.10
@@ -42,7 +56,7 @@ public class Game
     {
         Room rotunda, mammals, oceans, theatre, geology, astronomy, planetarium, mezzanine, galleries, mummies, gems, dinosaurs, research, auditorium, gifts, cafe;
       
-        // create the rooms - 1st floor
+        // create the rooms
         rotunda = new Room("inside the Smithsonian rotunda");
         mammals = new Room("in the mammals exhibit");
         oceans = new Room("in the oceans exhibit");
@@ -50,16 +64,12 @@ public class Game
         geology = new Room("in the geology exhibit");
         astronomy = new Room("in the astronomy exhibit");
         planetarium = new Room("in the planetarium room");
-
-		// create the rooms - 2nd floor
         mezzanine = new Room("in the mezzanine room");
         galleries = new Room("in the galleries room");
         mummies = new Room("in the mummies room");
         gems = new Room("in the gems room");
         dinosaurs = new Room("in the dinosaurs room");
         research = new Room("in the research room");
-
-		//create the rooms - ground floor
         auditorium = new Room("in the auditorium");
         gifts = new Room("in the giftship");
         cafe = new Room("in the cafe");
@@ -114,7 +124,7 @@ public class Game
         
         cafe.setExit("east", gifts);
         cafe.setExit("south", auditorium);
-
+        
         //create items
         Item datingTool = new Item("equipment to date artifacts",2);
         Item dino = new Item("dinosaur skeleton",5000);
@@ -195,15 +205,15 @@ public class Game
                 goRoom(command);
                 break;
                 
-            case LOOK:
+            case LOOK: // LAB 6
                 look();
                 break;
             
-            case PHOTO:
+            case PHOTO: // LAB 6
                 printPhoto();
                 break;
             
-            case BACK:
+            case BACK: // LAB 6
                 goBack();
                 break; 
                 
@@ -224,14 +234,14 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the museum.");
+        System.out.println("around at the museum.");  //change for LAB 6 for museum world
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
     }
     
     /**
-     * Implements a photo feature to take a photo in the room.
+     * Prints that the user that a photo has been taken.  For LAB 6.
      */
     private void printPhoto()
     {
@@ -259,14 +269,14 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            priorRoom = currentRoom;
+            priorRoom = currentRoom;  // LAB 6
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
     }
     
     /**
-     * Takes the user back by one room
+     * Takes the user back by one room.  For LAB 6.
      */
     private void goBack()
     {
@@ -281,7 +291,7 @@ public class Game
     }
     
     /**
-     * Implement look feature re-displays the the room description
+     * "Look" was entered.  For LAB 6.
      */
     private void look()
     {

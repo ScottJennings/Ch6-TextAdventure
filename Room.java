@@ -23,7 +23,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private HashMap<String, Item> items;        //stores info about items in this room.
+    private HashMap<String, Item> items;        // LAB 6: stores info about items in this room.
 
     /**
      * Create a room described "description". Initially, it has
@@ -35,7 +35,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<String, Room>();
-        items = new HashMap<String, Item>();
+        items = new HashMap<String, Item>(); //LAB 6
     }
 
     /**
@@ -48,15 +48,14 @@ public class Room
         exits.put(direction, neighbor);
     }
     
-     /**
-     * Place item in room
+    /**
+     * Place item in room.  For LAB 6
      * @param newItem  Item to place in the room.
      */
     public void placeItem(Item newItem) 
     {
         items.put(newItem.getDescription(), newItem);
     }
-    
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
@@ -105,8 +104,9 @@ public class Room
     
     /**
      * Returns a string describing the room's items, for example
-     * "Items:  <corkscrew> <dinosaur skeleton>".
-     * @return Detaisl of the room's items
+     * "Items:  <corkscrew> <dinosaur skeleton>".  For LAB 6
+     * 
+     * @return Details of the room's items
      */
     private String getItemString()
     {

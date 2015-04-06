@@ -1,12 +1,12 @@
-
 /**
  * Item class -  an item in an adventure game.
  * 
  * @author Scott Jennings
- * @version 04/06/2015
+ * @version 2015.04.05
  */
 public class Item
 {
+    // instance variables - replace the example below with your own
     private String description;
     private int weight;
 
@@ -17,7 +17,7 @@ public class Item
     }
 
     /**
-     * get description
+     * Get description
      * 
      * @return the item description
      */
