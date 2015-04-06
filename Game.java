@@ -34,30 +34,74 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room rotunda, mammals, oceans, theatre, geology, astronomy, planetarium, mezzanine, galleries, mummies, gems, dinosaurs, research, auditorium, gifts, cafe;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        rotunda = new Room("inside the Smithsonian rotunda");
+        mammals = new Room("in the mammals exhibit");
+        oceans = new Room("in the oceans exhibit");
+        theatre = new Room("in the theatre exhibit");
+        geology = new Room("in the geology exhibit");
+        astronomy = new Room("in the astronomy exhibit");
+        planetarium = new Room("in the planetarium room");
+        mezzanine = new Room("in the mezzanine room");
+        galleries = new Room("in the galleries room");
+        mummies = new Room("in the mummies room");
+        gems = new Room("in the gems room");
+        dinosaurs = new Room("in the dinosaurs room");
+        research = new Room("in the research room");
+        auditorium = new Room("in the auditorium");
+        gifts = new Room("in the giftship");
+        cafe = new Room("in the cafe");
         
-        // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        // initialise room exits on first floor
+        rotunda.setExit("north", oceans);
+        rotunda.setExit("west", mammals);
+        rotunda.setExit("east", astronomy);
+        rotunda.setExit("up", mezzanine);
+        rotunda.setExit("down", auditorium);
+        
+        mammals.setExit("north", geology);
+        mammals.setExit("east", rotunda);
 
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
-
-        currentRoom = outside;  // start game outside
+        oceans.setExit("west", geology);
+        oceans.setExit("east", theatre);
+        oceans.setExit("south", rotunda);
+        
+        theatre.setExit("west", oceans);
+        
+        astronomy.setExit("west", rotunda);
+        astronomy.setExit("east", planetarium);
+        
+        planetarium.setExit("west", astronomy);
+        
+        // initialize room exits on the second floor
+        mezzanine.setExit("north", galleries);
+        mezzanine.setExit("west", mummies);
+        mezzanine.setExit("east", gems);
+        mezzanine.setExit("down", rotunda);
+        
+        galleries.setExit("south", mezzanine);
+        galleries.setExit("west", research);
+        
+        mummies.setExit("north", dinosaurs);
+        mummies.setExit("east", mezzanine);
+        
+        gems.setExit("west", mezzanine);
+        
+        dinosaurs.setExit("south", mummies);
+        
+        research.setExit("west", galleries);
+        
+        // initialize room exits on the ground floor
+        auditorium.setExit("north", gifts);
+        auditorium.setExit("up", rotunda);
+        
+        gifts.setExit("west", cafe);
+        
+        cafe.setExit("east", gifts);
+        
+        currentRoom = rotunda;  // start game in the rotunda
     }
 
     /**
@@ -114,7 +158,11 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
-
+                
+            case LOOK:
+                look();
+                break;
+                
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -163,7 +211,15 @@ public class Game
             System.out.println(currentRoom.getLongDescription());
         }
     }
-
+    
+    /**
+     * "Look" was entered.
+     */
+    private void look()
+    {
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -178,5 +234,14 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+    
+    /**
+     * Starts the game outside of BlueJ
+     */
+    public static void main(String[] args)
+    {
+        Game game = new Game();
+        game.play();
     }
 }
