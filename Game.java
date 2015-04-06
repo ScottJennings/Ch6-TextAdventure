@@ -31,13 +31,13 @@ public class Game
     }
 
     /**
-     * Create all sixteen of the rooms and link their exits together.
+     * Create all the rooms and link their exits together.
      */
     private void createRooms()
     {
         Room rotunda, mammals, oceans, theatre, geology, astronomy, planetarium, mezzanine, galleries, mummies, gems, dinosaurs, research, auditorium, gifts, cafe;
       
-        // create 1st floor rooms
+        // create the rooms
         rotunda = new Room("inside the Smithsonian rotunda");
         mammals = new Room("in the mammals exhibit");
         oceans = new Room("in the oceans exhibit");
@@ -45,18 +45,14 @@ public class Game
         geology = new Room("in the geology exhibit");
         astronomy = new Room("in the astronomy exhibit");
         planetarium = new Room("in the planetarium room");
-        
-        // create the 2nd floor rooms
         mezzanine = new Room("in the mezzanine room");
         galleries = new Room("in the galleries room");
         mummies = new Room("in the mummies room");
         gems = new Room("in the gems room");
         dinosaurs = new Room("in the dinosaurs room");
         research = new Room("in the research room");
-        
-        // create the lowest/ground floor rooms
         auditorium = new Room("in the auditorium");
-        gifts = new Room("in the museum giftship");
+        gifts = new Room("in the giftship");
         cafe = new Room("in the cafe");
         
         // initialise room exits on first floor
@@ -109,28 +105,6 @@ public class Game
         
         cafe.setExit("east", gifts);
         cafe.setExit("south", auditorium);
-        
-        //create items
-        Item datingTool = new Item("scanner to date artifacts",2);
-        Item dino = new Item("dinosaur skeleon",5000);
-        Item mammoth = new Item("wooly mammoth",2600);
-        Item hopeDiamond = new Item("the Hope diamond",3);
-        Item kingTutMask = new Item("King Tut's mask",75);
-        Item giantSquid = new Item("giant squid",800);
-        Item meteorite = new Item("meteorite",1);
-        Item mummyCase = new Item("mummy case",45);
-        Item infoDesk = new Item("information desk",200);
-        
-        //place items in rooms
-        research.placeItem(datingTool);
-        dinosaurs.placeItem(dino);
-        rotunda.placeItem(mammoth);
-        gems.placeItem(hopeDiamond);
-        mummies.placeItem(kingTutMask);
-        oceans.placeItem(giantSquid);
-        geology.placeItem(meteorite);
-        mummies.placeItem(mummyCase);
-        rotunda.placeItem(infoDesk);
         
         currentRoom = rotunda;  // start game in the rotunda
     }
