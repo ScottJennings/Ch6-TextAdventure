@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room priorRoom = null;
         
     /**
      * Create the game and initialise its internal map.
@@ -70,6 +71,9 @@ public class Game
         
         theatre.setExit("west", oceans);
         
+        geology.setExit("south", mammals);
+        geology.setExit("east", oceans);
+        
         astronomy.setExit("west", rotunda);
         astronomy.setExit("east", planetarium);
         
@@ -82,7 +86,7 @@ public class Game
         mezzanine.setExit("down", rotunda);
         
         galleries.setExit("south", mezzanine);
-        galleries.setExit("west", research);
+        galleries.setExit("east", research);
         
         mummies.setExit("north", dinosaurs);
         mummies.setExit("east", mezzanine);
@@ -100,6 +104,7 @@ public class Game
         gifts.setExit("west", cafe);
         
         cafe.setExit("east", gifts);
+        cafe.setExit("south", auditorium);
         
         currentRoom = rotunda;  // start game in the rotunda
     }
@@ -162,6 +167,14 @@ public class Game
             case LOOK:
                 look();
                 break;
+            
+            case PHOTO:
+                printPhoto();
+                break;
+            
+            case BACK:
+                goBack();
+                break; 
                 
             case QUIT:
                 wantToQuit = quit(command);
@@ -180,12 +193,20 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("around at the museum.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
     }
-
+    
+    /**
+     * Prints that the user that a photo has been taken.
+     */
+    private void printPhoto()
+    {
+        System.out.println("You have taken a photo of the room");
+    }
+    
     /** 
      * Try to go in one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
@@ -207,7 +228,22 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            priorRoom = currentRoom;
             currentRoom = nextRoom;
+            System.out.println(currentRoom.getLongDescription());
+        }
+    }
+    
+    /**
+     * Takes the user back by one room
+     */
+    private void goBack()
+    {
+        if (priorRoom == null){
+            System.out.println("You have only just arrived and have no rooms to go back to");
+        }
+        else{
+            currentRoom = priorRoom;
             System.out.println(currentRoom.getLongDescription());
         }
     }
