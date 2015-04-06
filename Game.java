@@ -11,6 +11,11 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
+ * @author Scott Jennings
+ * @version 2015.04.05
+ * 
+ * Scott Jennings has implemented:  16 rooms, two axis of movement, 
+ * 
  * @author  Michael Kölling and David J. Barnes
  * @version 2011.08.10
  */
@@ -37,7 +42,7 @@ public class Game
     {
         Room rotunda, mammals, oceans, theatre, geology, astronomy, planetarium, mezzanine, galleries, mummies, gems, dinosaurs, research, auditorium, gifts, cafe;
       
-        // create the rooms
+        // create the rooms - 1st floor
         rotunda = new Room("inside the Smithsonian rotunda");
         mammals = new Room("in the mammals exhibit");
         oceans = new Room("in the oceans exhibit");
@@ -45,12 +50,16 @@ public class Game
         geology = new Room("in the geology exhibit");
         astronomy = new Room("in the astronomy exhibit");
         planetarium = new Room("in the planetarium room");
+
+		// create the rooms - 2nd floor
         mezzanine = new Room("in the mezzanine room");
         galleries = new Room("in the galleries room");
         mummies = new Room("in the mummies room");
         gems = new Room("in the gems room");
         dinosaurs = new Room("in the dinosaurs room");
         research = new Room("in the research room");
+
+		//create the rooms - ground floor
         auditorium = new Room("in the auditorium");
         gifts = new Room("in the giftship");
         cafe = new Room("in the cafe");
@@ -105,6 +114,28 @@ public class Game
         
         cafe.setExit("east", gifts);
         cafe.setExit("south", auditorium);
+
+        //create items
+        Item datingTool = new Item("equipment to date artifacts",2);
+        Item dino = new Item("dinosaur skeleton",5000);
+        Item mammoth = new Item("woolly mammoth",2600);
+        Item hopeDiamond = new Item("the Hope diamond",3);
+        Item kingTutMask = new Item("King Tut's mask",75);
+        Item giantSquid = new Item("giant squid", 800);
+        Item meteorite = new Item("meteorite", 1);
+        Item mummyCase = new Item("mummy case", 45);
+        Item infoDesk = new Item("information desk", 200);
+        
+        //place items in rooms
+        research.placeItem(datingTool);
+        dinosaurs.placeItem(dino);
+        rotunda.placeItem(mammoth);
+        gems.placeItem(hopeDiamond);
+        mummies.placeItem(kingTutMask);
+        oceans.placeItem(giantSquid);
+        geology.placeItem(meteorite);
+        mummies.placeItem(mummyCase);
+        rotunda.placeItem(infoDesk);
         
         currentRoom = rotunda;  // start game in the rotunda
     }
@@ -200,7 +231,7 @@ public class Game
     }
     
     /**
-     * Prints that the user that a photo has been taken.
+     * Implements a photo feature to take a photo in the room.
      */
     private void printPhoto()
     {
@@ -239,17 +270,18 @@ public class Game
      */
     private void goBack()
     {
-        if (priorRoom == null){
-            System.out.println("You have only just arrived and have no rooms to go back to");
+        if (priorRoom == null)
+        {
+            System.out.println("You have only just arrived and have no rooms to go back to.");
         }
         else{
             currentRoom = priorRoom;
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println("You have gone back." + "\n" + currentRoom.getLongDescription());
         }
     }
     
     /**
-     * "Look" was entered.
+     * Implement look feature re-displays the the room description
      */
     private void look()
     {

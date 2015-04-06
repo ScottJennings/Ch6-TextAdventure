@@ -12,6 +12,9 @@ import java.util.Iterator;
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
+ * @author Scott Jennings
+ * @version 2015.04.05
+ * 
  * @author  Michael Kölling and David J. Barnes
  * @version 2011.08.10
  */
@@ -44,7 +47,16 @@ public class Room
     {
         exits.put(direction, neighbor);
     }
-
+    
+     /**
+     * Place item in room
+     * @param newItem  Item to place in the room.
+     */
+    public void placeItem(Item newItem) 
+    {
+        items.put(newItem.getDescription(), newItem);
+    }
+    
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
@@ -62,7 +74,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return "You are " + description + "\n" + getItemString() + "\n" + getExitString();
     }
 
     /**
